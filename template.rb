@@ -49,11 +49,9 @@ rake "db:setup"
 say "Installing gems =========="
 
 if simple_form
-  if bootstrap
-    generate "simple_form:install --bootstrap"
-  else
-    generate "simpe_form:install"
-  end
+  cmd = ["simple_form:install"]
+  cmd << "--bootstrap" if bootstrap
+  generate cmd.join(" ")
 end
 if bootstrap
   generate "bootstrap:install"
