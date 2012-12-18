@@ -7,26 +7,27 @@ compass =       yes? "Use compass?"
 
 # ### Add necessary gems ###
 say "Add gems =========="
-gem "haml-rails"
-gem "thin"
-gem "simple_form" if simple_form
-gem "devise"      if devise
-gem "cancan"      if cancan
-gem "activeadmin" if active_admin
+gem 'haml-rails'
+gem 'thin'
+gem 'simple_form' if simple_form
+gem 'devise'      if devise
+gem 'cancan'      if cancan
+gem 'activeadmin' if active_admin
 if bootstrap
-  gem "therubyracer"
-  gem "less-rails"
+  gem 'therubyracer'
+  gem 'less-rails'
   gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 end
 if compass
-  gem 'compass'
   gem_group :assets do
+    gem 'compass'
     gem 'compass-rails'
   end
 end
 gem_group :development do
-  gem "quiet_assets"
+  gem 'quiet_assets'
   gem 'bullet'
+  gem 'translate-rails3', require: 'translate'
 end
 
 run "bundle install"
@@ -60,6 +61,13 @@ end
 generate "devise:install"       if devise
 generate "active_admin:install" if active_admin
 generate "cancan:ability"       if cancan
+insert_into_file "config/environments/development.rb", "\n\n\tconfig.after_initialize do
+\t  Bullet.enable = true
+\t  Bullet.bullet_logger = true
+\t  Bullet.console = true
+\t  Bullet.disable_browser_cache = true
+\tend
+", before: "\nend" if File.exist?("config/environments/development.rb")
 
 rake "db:migrate"
 
