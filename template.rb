@@ -25,6 +25,9 @@ if compass
   end
 end
 gem_group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'meta_request', '0.2.1'
   gem 'quiet_assets'
   gem 'bullet'
   gem 'translate-rails3', require: 'translate'
