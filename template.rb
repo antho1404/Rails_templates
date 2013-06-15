@@ -68,7 +68,6 @@ insert_into_file "config/environments/development.rb", "\n\n\tconfig.after_initi
 \t  Bullet.enable = true
 \t  Bullet.bullet_logger = true
 \t  Bullet.console = true
-\t  Bullet.disable_browser_cache = true
 \tend
 ", before: "\nend" if File.exist?("config/environments/development.rb")
 
