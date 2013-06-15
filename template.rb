@@ -14,9 +14,9 @@ gem 'devise'      if devise
 gem 'cancan'      if cancan
 gem 'activeadmin' if active_admin
 if bootstrap
-  gem 'therubyracer'
-  gem 'less-rails'
-  gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+  gem_group :assets do
+    gem 'bootstrap-sass-rails'
+  end
 end
 if compass
   gem_group :assets do
@@ -57,10 +57,10 @@ if simple_form
   cmd << "--bootstrap" if bootstrap
   generate cmd.join(" ")
 end
-if bootstrap
-  generate "bootstrap:install"
-  generate "bootstrap:layout application fixed"
-end
+# if bootstrap
+#   generate "bootstrap:install"
+#   generate "bootstrap:layout application fixed"
+# end
 generate "devise:install"       if devise
 generate "active_admin:install" if active_admin
 generate "cancan:ability"       if cancan
